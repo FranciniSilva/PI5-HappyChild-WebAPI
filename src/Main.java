@@ -18,7 +18,7 @@ public class Main {
 			pID = 1;				
 			try {
 				conn = Database.get().conn();		
-				psta = conn.prepareStatement("select * from Produto where idProduto = ?");
+				psta = conn.prepareStatement("select * from Produto where id = ?");
 				psta.setInt(1, pID);
 				
 				
@@ -26,7 +26,7 @@ public class Main {
 				ResultSet rs = psta.executeQuery();
 				
 				while (rs.next()) {
-					System.out.println(rs.getString("nomeProduto"));
+					System.out.println(rs.getString("nome"));
 					
 				}
 			}

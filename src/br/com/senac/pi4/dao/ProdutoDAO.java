@@ -37,7 +37,7 @@ public class ProdutoDAO {
 		return produtoDTO;
 	}
 	
-public ProdutoDTO updateUsuario(ProdutoDTO produto) throws Exception {
+public ProdutoDTO updateProduto(ProdutoDTO produto) throws Exception {
 		
 		Connection conn = null;
 		PreparedStatement psta = null;
@@ -69,7 +69,7 @@ public ProdutoDTO updateUsuario(ProdutoDTO produto) throws Exception {
 		return produto;
 	}
 	
-	public void deleteProduto(String produtoId) throws Exception {
+	public String deleteProduto(String produtoId) throws Exception {
 		// exemplo de select
 		Connection conn = null;
 		PreparedStatement psta = null;
@@ -94,6 +94,8 @@ public ProdutoDTO updateUsuario(ProdutoDTO produto) throws Exception {
 			if (conn != null)
 				conn.close();
 		}
+		
+		return "Produto removido com sucesso.";
 	}
 
 }

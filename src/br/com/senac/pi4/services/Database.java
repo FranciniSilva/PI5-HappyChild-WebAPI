@@ -17,7 +17,7 @@ public class Database {
 	
 	public Connection conn () throws Exception {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		String connectionUrl = "jdbc:sqlserver://192.168.33.219\\SQLEXPRESS;user=sa;password=@admin;database=happy_child";
+		String connectionUrl = "jdbc:sqlserver://192.168.1.32\\SQLEXPRESS;user=sa;password=@admin;database=happy_child";
 //		String connectionUrl = "jdbc:sqlserver://josiasveras.database.windows.net;user=jorzias.sveras@josiasveras;password=My0wn4zur3;database=PI4";
 		Connection conn = DriverManager.getConnection(connectionUrl);
 

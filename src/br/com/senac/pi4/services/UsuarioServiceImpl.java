@@ -28,5 +28,13 @@ public class UsuarioServiceImpl {
 	public byte[] selectImage(String usuarioId) throws Exception {
 		return usuarioDAO.selectImage(usuarioId);
 	}
+	
+	public UsuarioDTO updateUsuario(UsuarioDTO usuarioDTO) throws Exception {
+		return usuarioDAO.updateUsuario(usuarioDTO);
+	}
+	
+	public String deleteUsuario(String usuarioId) throws Exception {
+		return usuarioDAO.deleteUsuario(usuarioId);
+	}
 
 }

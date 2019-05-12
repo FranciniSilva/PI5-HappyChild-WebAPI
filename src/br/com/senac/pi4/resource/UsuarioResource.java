@@ -4,14 +4,17 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.senac.pi4.model.ProdutoDTO;
 import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.UsuarioServiceImpl;
 import io.swagger.annotations.Api;
@@ -162,6 +165,54 @@ public class UsuarioResource {
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 
+	}
+	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Atualiza um usuario na base de dados",
+	           response = UsuarioDTO.class)
+	public Response updateProduto(UsuarioDTO usuarioDTO) {
+		try {
+			usuarioDTO = usuarioServiceImpl.updateUsuario(usuarioDTO);
+		} catch (Exception e) {
+			return Response.status(500).entity(e.getMessage()).build();
+		}
+		if (usuarioDTO == null)
+			return Response.status(404).entity("Usuario nao atualizado").build();
+
+		return Response.status(200).entity(usuarioDTO).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+	}
+	
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Remove um usuario na base de dados",
+	           response = UsuarioDTO.class)
+	public Response deleteProduto(String usuarioId) {
+		
+		String resposta = null;
+		try {
+			resposta = usuarioServiceImpl.deleteUsuario(usuarioId);
+		} catch (Exception e) {
+			return Response.status(500).entity(e.getMessage()).build();
+		}
+		if (resposta == null)
+			return Response.status(404).entity("Usuario nao removido").build();
+
+		return Response.status(200).entity(resposta).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 	
 	

@@ -1,6 +1,5 @@
 package br.com.senac.pi4.dao;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +14,7 @@ import br.com.senac.pi4.services.Database;
 
 public class UsuarioDAO {
 
+	@SuppressWarnings("resource")
 	public UsuarioDTO saveUsuario(UsuarioDTO usuario) throws Exception {
 
 		Connection conn = null;
@@ -218,7 +218,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
-	public void deleteUsuario(String usuarioId) throws Exception {
+	public String deleteUsuario(String usuarioId) throws Exception {
 		// exemplo de select
 		Connection conn = null;
 		PreparedStatement psta = null;
@@ -243,6 +243,8 @@ public class UsuarioDAO {
 			if (conn != null)
 				conn.close();
 		}
+		
+		return "Usuario removido com sucesso";
 	}
 
 }
