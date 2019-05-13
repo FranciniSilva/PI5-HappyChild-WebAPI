@@ -14,6 +14,8 @@ public class EnderecoDTO {
 	private String bairro;
 	private String localidade;
 	private String uf;
+	private String latitude;
+	private String longitude;
 	
 	@ApiModelProperty(value = "id do endereco", required = true)
 	public Long getId() {
@@ -78,5 +80,19 @@ public class EnderecoDTO {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	
+	
 
 }
