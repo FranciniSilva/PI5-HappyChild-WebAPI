@@ -194,8 +194,7 @@ public class UsuarioDAO {
 
 		try {
 			conn = Database.get().conn();
-			psta = conn.prepareStatement("UPDATE Usuario SET nome =?, "
-                    + "senha =?, email =?"
+			psta = conn.prepareStatement("UPDATE Usuario SET nome =?, email =?"
                     + " WHERE id =?");
 			
 			psta.setString(1, usuario.getNome());

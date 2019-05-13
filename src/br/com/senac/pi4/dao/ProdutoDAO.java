@@ -2,7 +2,10 @@ package br.com.senac.pi4.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.senac.pi4.model.ProdutoDTO;
 import br.com.senac.pi4.model.UsuarioDTO;
@@ -96,6 +99,82 @@ public ProdutoDTO updateProduto(ProdutoDTO produto) throws Exception {
 		}
 		
 		return "Produto removido com sucesso.";
+	}
+	
+	public List<ProdutoDTO> selectAllProductsByIdUser(String usuarioId) throws Exception {
+		// exemplo de select
+		Connection conn = null;
+		PreparedStatement psta = null;
+		Integer pID = null;
+		pID = Integer.parseInt(usuarioId);
+		List<ProdutoDTO> listPg = new ArrayList<ProdutoDTO>();
+
+		try {
+			conn = Database.get().conn();
+			psta = conn.prepareStatement("select p.id as id_prod, p.nome as nome_prod, p.descricao as desc_prod, p.data_criacao as dt_prod, u.id as id_usuario, u.foto as usuario_foto, u.nome as nome_usuario from produto p INNER JOIN usuario u on p.id_usuario = u.id where id_usuario = ?;");
+			psta.setInt(1, pID);
+
+			ResultSet rs = psta.executeQuery();
+
+			while (rs.next()) {
+				ProdutoDTO pg = new ProdutoDTO();
+				pg.setId(rs.getLong("id_prod"));
+				pg.setNome(rs.getString("nome_prod"));
+				pg.setDescricao(rs.getString("desc_prod"));
+				pg.setDataCriacao(rs.getDate("dt_prod"));
+				pg.setUsuario(new UsuarioDTO(rs.getLong("id_usuario"), rs.getString("nome_usuario"), rs.getString("usuario_foto")));
+				
+				listPg.add(pg);
+
+			}
+		} catch (SQLException e) {
+			throw e;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (psta != null)
+				psta.close();
+			if (conn != null)
+				conn.close();
+		}
+		return listPg;
+	}
+	
+	public ProdutoDTO selectProdutoById(String produtoId) throws Exception {
+		// exemplo de select
+		Connection conn = null;
+		PreparedStatement psta = null;
+
+		ProdutoDTO pg = null;
+		Integer pID = null;
+		pID = Integer.parseInt(produtoId);
+		try {
+			conn = Database.get().conn();
+			psta = conn.prepareStatement("select p.id as id_prod, p.nome as nome_prod, p.descricao as desc_prod, p.data_criacao as dt_prod, u.foto as usuario_foto,u.id as id_usuario, u.nome as nome_usuario from produto p INNER JOIN usuario u on p.id_usuario = u.id where p.id = ?;");
+			psta.setInt(1, pID);
+
+			ResultSet rs = psta.executeQuery();
+
+			while (rs.next()) {
+				pg = new ProdutoDTO();
+				pg.setId(rs.getLong("id_prod"));
+				pg.setNome(rs.getString("nome_prod"));
+				pg.setDescricao(rs.getString("desc_prod"));
+				pg.setDataCriacao(rs.getDate("dt_prod"));
+				pg.setUsuario(new UsuarioDTO(rs.getLong("id_usuario"), rs.getString("nome_usuario"), rs.getString("usuario_foto")));
+
+			}
+		} catch (SQLException e) {
+			throw e;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (psta != null)
+				psta.close();
+			if (conn != null)
+				conn.close();
+		}
+		return pg;
 	}
 
 }

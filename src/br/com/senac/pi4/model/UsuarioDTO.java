@@ -28,6 +28,13 @@ public class UsuarioDTO {
     	super();
     }
     
+    public UsuarioDTO(Long id, String nome, String foto) {
+    	this();
+    	this.id = id;
+    	this.nome = nome;
+    	this.foto = foto;
+    }
+    
     public UsuarioDTO(Long id, String nome) {
     	this();
     	this.id = id;

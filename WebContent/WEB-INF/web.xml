@@ -71,12 +71,7 @@
      <servlet-name>jersey</servlet-name>
      <url-pattern>/rest/*</url-pattern>
    </servlet-mapping>
-   
-   <servlet-mapping>
-    <servlet-name>UsuarioDTO</servlet-name>
-    <url-pattern>/usuario</url-pattern>
-  </servlet-mapping>
-  
+
 
   
 <!--   <servlet-mapping>
