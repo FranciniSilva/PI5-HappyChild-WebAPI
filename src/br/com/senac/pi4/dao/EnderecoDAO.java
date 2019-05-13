@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import br.com.senac.pi4.model.EnderecoDTO;
-import br.com.senac.pi4.model.ProdutoDTO;
 import br.com.senac.pi4.services.Database;
 
 public class EnderecoDAO {
@@ -41,5 +40,7 @@ public class EnderecoDAO {
 		}
 		return enderecoDTO;
 	}
+	
+	
 
 }
